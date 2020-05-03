@@ -91,18 +91,19 @@ namespace VMCProtocolMonitor
             bool exit = false;
             int cnt = 0;
             int oldviewCount = 0;
-            HTTP http = new HTTP();
+            HTTP http = new HTTP("http://127.0.0.1:8888/");
+
+            Console.WriteLine("### Press ENTER key to stop server");
 
             while (!exit)
             {
-                Console.SetCursorPosition(0, 0);
-                Console.WriteLine("### "+ version);
-                Console.WriteLine("### Press ENTER key to stop server");
+                string responce = "";
 
                 List<KeyValuePair<string,OscMessage>> view = packets.ToList();
                 for (int i = 0; i < view.Count; i++) {
-                    Console.WriteLine("# "+view[i].Value);
+                    responce += ("# "+view[i].Value)+"\n";
                 }
+                http.SetResponse(responce);
 
                 if (Console.KeyAvailable)
                 {
@@ -111,21 +112,8 @@ namespace VMCProtocolMonitor
                         exit = true;
                     }
                 }
+
                 Thread.Sleep(500);
-
-                //要素が増えたらゴミ消し
-                if (oldviewCount != view.Count) {
-                    oldviewCount = view.Count;
-                    Console.Clear();
-                    cnt = 0;
-                }
-
-                //何回かに1回画面消してゴミ消し
-                cnt++;
-                if (cnt > 10) {
-                    Console.Clear();
-                    cnt = 0;
-                }
             }
             http.Dispose();
         }
