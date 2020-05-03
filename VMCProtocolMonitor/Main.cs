@@ -89,9 +89,7 @@ namespace VMCProtocolMonitor
         private void ListMode()
         {
             bool exit = false;
-            int cnt = 0;
-            int oldviewCount = 0;
-            HTTP http = new HTTP("http://127.0.0.1:8888/");
+            HTTP http = new HTTP("http://127.0.0.1:"+setting.HttpPort+"/");
 
             Console.WriteLine("### Press ENTER key to stop server");
 
@@ -124,6 +122,7 @@ namespace VMCProtocolMonitor
             Console.WriteLine("# Setting loaded");
 
             osc = new OSC(setting.Port, OnBundle, OnMessage);
+            Console.WriteLine("# Listen on Port : "+setting.Port);
         }
         private void StopServer()
         {

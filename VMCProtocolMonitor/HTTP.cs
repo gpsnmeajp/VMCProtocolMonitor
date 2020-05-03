@@ -39,7 +39,7 @@ namespace VMCProtocolMonitor
                 HttpListenerContext context = listener.GetContext();
                 HttpListenerRequest request = context.Request;
 
-                Console.WriteLine(request.Url.LocalPath);
+                //Console.WriteLine(request.Url.LocalPath);
 
                 HttpListenerResponse response = context.Response;
                 string res = "";
@@ -55,6 +55,9 @@ namespace VMCProtocolMonitor
                             break;
                         case "/script.js":
                             res = File.ReadAllText("script.js", new UTF8Encoding(false));
+                            break;
+                        case "/worker.js":
+                            res = File.ReadAllText("worker.js", new UTF8Encoding(false));
                             break;
                         case "/style.css":
                             res = File.ReadAllText("style.css", new UTF8Encoding(false));

@@ -33,5 +33,6 @@ namespace VMCProtocolMonitor
     {
         public int Port { get; set; }
         public bool ListMode { get; set; }
+        public int HttpPort { get; set; }
     }
 }
